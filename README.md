@@ -72,4 +72,3 @@ The study plan covers core SQL concepts required for data analysis and data engi
 
 
 
-🚀 Consistency over intensity.
