@@ -40,11 +40,11 @@ WHERE s.activity_type = 'start'
 GROUP BY s.machine_id;
 
 /*577. Employee Bonus*/
-SELECT e.name, b.bonus
-FROM Employee e
-LEFT JOIN Bonus b
-  ON e.empId = b.empId
-WHERE b.bonus < 1000 OR b.bonus IS NULL;
+SELECT Employee.name,Bonus.bonus 
+from Employee 
+left join Bonus  
+ on Employee.empId =Bonus.empId 
+where Bonus.bonus <1000 or Bonus.bonus  is null; 
 
 /*1280. Students and Examinations*/
 SELECT 
