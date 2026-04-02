@@ -13,19 +13,13 @@ WHERE activity_date BETWEEN DATEADD(DAY, -29, '2019-07-27') AND '2019-07-27'
 GROUP BY activity_date
 ORDER BY activity_date;
 /*1070. Product Sales Analysis III*/
-SELECT
-    s.product_id,
-    s.year AS first_year,
-    s.quantity,
-    s.price
-FROM Sales s
-JOIN (
-    SELECT product_id, MIN(year) AS first_year
+SELECT product_id, year AS first_year, quantity, price
+FROM (
+    SELECT *,
+           RANK() OVER (PARTITION BY product_id ORDER BY year) AS rnk
     FROM Sales
-    GROUP BY product_id
-) AS first_sales
-ON s.product_id = first_sales.product_id
-   AND s.year = first_sales.first_year;
+) t
+WHERE rnk = 1;
 
 /*596. Classes With at Least 5 Students */ 
 SELECT 
