@@ -7,15 +7,15 @@ WHERE salary < 30000
 ORDER BY employee_id;
 
 /*626. Exchange Seats */
-SELECT 
-    CASE 
-        WHEN id % 2 = 1 AND id + 1 <= (SELECT MAX(id) FROM Seat) THEN id + 1
-        WHEN id % 2 = 0 THEN id - 1
-        ELSE id
-    END AS id,
-    student
-FROM Seat
-ORDER BY id;
+WITH CTE AS
+(
+Select id, student,
+lead(student,1) over(order by id) as next,
+lag(student,1) over(order by id) as prev
+from Seat)
+Select id,
+COALESCE((CASE WHEN id%2 = 1 Then next Else prev END),student) as student
+from CTE
 
 /*1341. Movie Rating */
 
