@@ -35,6 +35,18 @@ FROM (
 GROUP BY sell_date
 ORDER BY sell_date;
 --------------------------------------------------------------------------------------------
+/*1484. Group Sold Products By The Date*/
+SELECT
+    sell_date,
+   COUNT(*) AS num_sold,
+    STRING_AGG(product, ',') WITHIN GROUP (ORDER BY product) AS products
+FROM (
+    SELECT DISTINCT sell_date, product
+    FROM Activities
+) AS t
+GROUP BY sell_date
+ORDER BY sell_date;
+--------------------------------------------------------------------------------------------
 /*1327. List the Products Ordered in a Period*/
 SELECT 
     p.product_name,
