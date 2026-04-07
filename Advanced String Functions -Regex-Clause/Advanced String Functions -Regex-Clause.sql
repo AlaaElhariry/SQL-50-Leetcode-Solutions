@@ -19,16 +19,11 @@ INNER JOIN Person p2 ON p1.Email = p2.Email
 WHERE p1.Id > p2.Id;
 --------------------------------------------------------------------------------------------
 /*176. Second Highest Salary*/
-SELECT
-    sell_date,
-    COUNT(*) AS num_sold,
-    STRING_AGG(product, ',') WITHIN GROUP (ORDER BY product) AS products
-FROM (
-    SELECT DISTINCT sell_date, product
-    FROM Activities
-) AS t
-GROUP BY sell_date
-ORDER BY sell_date;
+SELECT 
+    (SELECT MAX(salary) 
+     FROM Employee
+     WHERE salary < (SELECT MAX(salary) FROM Employee)
+    ) AS SecondHighestSalary;
 --------------------------------------------------------------------------------------------
 /*1484. Group Sold Products By The Date*/
 SELECT
