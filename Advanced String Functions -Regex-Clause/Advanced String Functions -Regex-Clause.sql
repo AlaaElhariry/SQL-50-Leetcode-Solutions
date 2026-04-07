@@ -13,15 +13,10 @@ WHERE
    OR conditions LIKE '% DIAB1%'   
 --------------------------------------------------------------------------------------------
 /*196. Delete Duplicate Emails*/
-WITH CTE AS (
-    SELECT 
-        id,
-        email,
-        ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS rn
-    FROM Person
-)
-DELETE FROM CTE
-WHERE rn > 1;
+DELETE p1 
+FROM Person p1
+INNER JOIN Person p2 ON p1.Email = p2.Email
+WHERE p1.Id > p2.Id;
 --------------------------------------------------------------------------------------------
 /*176. Second Highest Salary*/
 SELECT
