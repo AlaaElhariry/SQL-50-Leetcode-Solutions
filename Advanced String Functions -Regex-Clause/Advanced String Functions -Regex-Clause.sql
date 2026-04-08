@@ -28,7 +28,7 @@ SELECT
 /*1484. Group Sold Products By The Date*/
 SELECT
     sell_date,
-    COUNT(DISTINCT product) AS num_sold,
+    COUNT(*) AS num_sold,
     STRING_AGG(product, ',') WITHIN GROUP (ORDER BY product) AS products
 FROM
     (Select distinct * from Activities) as t
