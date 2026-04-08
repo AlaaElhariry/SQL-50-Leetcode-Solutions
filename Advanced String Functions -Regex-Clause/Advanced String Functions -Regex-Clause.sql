@@ -26,16 +26,17 @@ SELECT
     ) AS SecondHighestSalary;
 --------------------------------------------------------------------------------------------
 /*1484. Group Sold Products By The Date*/
-SELECT
+select 
     sell_date,
-    COUNT(*) AS num_sold,
-    STRING_AGG(product, ',') WITHIN GROUP (ORDER BY product) AS products
-FROM
-    (Select distinct * from Activities) as t
-GROUP BY
-    sell_date
-ORDER BY
-    sell_date;
+    count(*)as num_sold,
+    string_agg(product,',') as products                     
+
+
+from (select distinct *
+from Activities ) as t
+
+group by sell_date
+order by sell_date
 --------------------------------------------------------------------------------------------
 /*1327. List the Products Ordered in a Period*/
 SELECT 
